@@ -19,6 +19,12 @@ log() { echo "  $1"; }
 ok() { echo "  ✅ $1"; }
 warn() { echo "  ⚠️  $1"; }
 
+is_skipped_entry() {
+    local name="$1"
+
+    [[ "$name" == .* || "$name" == *.backup-* ]]
+}
+
 copy_dir_replace() {
     local src="$1"
     local dst="$2"
@@ -43,7 +49,7 @@ warn_repo_only_dirs() {
         if [[ -d "$repo_item" ]]; then
             local name
             name="$(basename "$repo_item")"
-            [[ "$name" == .* ]] && continue
+            is_skipped_entry "$name" && continue
             if [[ ! -d "$local_dir/$name" ]]; then
                 warn "Repo-only $label remains: $name/"
                 ((stale_count++)) || true
@@ -69,7 +75,7 @@ warn_repo_only_files() {
         if [[ -f "$repo_item" ]]; then
             local name
             name="$(basename "$repo_item")"
-            [[ "$name" == .* ]] && continue
+            is_skipped_entry "$name" && continue
             if [[ ! -f "$local_dir/$name" ]]; then
                 warn "Repo-only $label remains: $name"
                 ((stale_count++)) || true
@@ -106,7 +112,7 @@ if [[ -d "$OPENCODE_SKILLS_DIR" ]]; then
     for skill_dir in "$OPENCODE_SKILLS_DIR"/*/; do
         if [[ -d "$skill_dir" ]]; then
             skill_name="$(basename "$skill_dir")"
-            [[ "$skill_name" == .* ]] && continue
+            is_skipped_entry "$skill_name" && continue
             dst="$SCRIPT_DIR/opencode/skills/$skill_name"
             copy_dir_replace "$skill_dir" "$dst" "skill: $skill_name/"
             ((skill_count++)) || true
@@ -125,7 +131,7 @@ if [[ -d "$OPENCODE_COMMANDS_DIR" ]]; then
     for command_file in "$OPENCODE_COMMANDS_DIR"/*; do
         if [[ -f "$command_file" ]]; then
             command_name="$(basename "$command_file")"
-            [[ "$command_name" == .* ]] && continue
+            is_skipped_entry "$command_name" && continue
             cp "$command_file" "$SCRIPT_DIR/opencode/commands/$command_name"
             ok "Pulled command: $command_name"
             ((command_count++)) || true
@@ -155,7 +161,7 @@ if [[ -d "$CODEX_SKILLS_DIR" ]]; then
     for skill_dir in "$CODEX_SKILLS_DIR"/*/; do
         if [[ -d "$skill_dir" ]]; then
             skill_name="$(basename "$skill_dir")"
-            [[ "$skill_name" == .* ]] && continue
+            is_skipped_entry "$skill_name" && continue
             dst="$SCRIPT_DIR/codex/skills/$skill_name"
             copy_dir_replace "$skill_dir" "$dst" "Codex skill: $skill_name/"
             ((skill_count++)) || true

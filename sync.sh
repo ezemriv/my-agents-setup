@@ -15,27 +15,25 @@ CONFIG_FILES=(
     "AGENTS.md"
 )
 
-RUN_ID="$(date -u +%Y-%m-%dT%H-%M-%SZ)"
-
-log() { echo "  $1"; }
 ok() { echo "  ✅ $1"; }
 warn() { echo "  ⚠️  $1"; }
 
-copy_file_with_backup() {
+is_skipped_entry() {
+    local name="$1"
+
+    [[ "$name" == .* || "$name" == *.backup-* ]]
+}
+
+copy_file_replace() {
     local src="$1"
     local dst="$2"
     local label="$3"
 
-    if [[ -f "$dst" ]]; then
-        local backup="${dst}.backup-$RUN_ID"
-        cp "$dst" "$backup"
-        log "Backed up existing → $(basename "$backup")"
-    fi
     cp "$src" "$dst"
     ok "Copied $label"
 }
 
-copy_dir_with_backup() {
+copy_dir_replace() {
     local src="$1"
     local dst="$2"
     local label="$3"
@@ -46,9 +44,6 @@ copy_dir_with_backup() {
     tmp="$(mktemp -d "$parent/.sync-tmp.XXXXXX")"
     cp -R "$src" "$tmp/$(basename "$dst")"
     if [[ -e "$dst" ]]; then
-        local backup="${dst}.backup-$RUN_ID"
-        cp -R "$dst" "$backup"
-        log "Backed up existing → $(basename "$backup")"
         rm -rf "$dst"
     fi
     mv "$tmp/$(basename "$dst")" "$dst"
@@ -67,7 +62,7 @@ for file in "${CONFIG_FILES[@]}"; do
     src="$SCRIPT_DIR/opencode/config/$file"
     dst="$OPENCODE_DIR/$file"
     if [[ -f "$src" ]]; then
-        copy_file_with_backup "$src" "$dst" "$file"
+        copy_file_replace "$src" "$dst" "$file"
     else
         warn "Source not found: $src"
     fi
@@ -81,9 +76,9 @@ if [[ -d "$src" ]]; then
     for skill_dir in "$src"/*/; do
         if [[ -d "$skill_dir" ]]; then
             skill_name="$(basename "$skill_dir")"
-            [[ "$skill_name" == .* ]] && continue
+            is_skipped_entry "$skill_name" && continue
             dst="$OPENCODE_SKILLS_DIR/$skill_name"
-            copy_dir_with_backup "$skill_dir" "$dst" "OpenCode skill: $skill_name/"
+            copy_dir_replace "$skill_dir" "$dst" "OpenCode skill: $skill_name/"
             ((skill_count++)) || true
         fi
     done
@@ -97,7 +92,7 @@ echo "=== Syncing Commands ==="
 src="$SCRIPT_DIR/opencode/commands"
 dst="$OPENCODE_DIR/commands"
 if [[ -d "$src" ]]; then
-    copy_dir_with_backup "$src" "$dst" "opencode/commands/"
+    copy_dir_replace "$src" "$dst" "opencode/commands/"
 else
     warn "Source not found: $src"
 fi
@@ -107,7 +102,7 @@ echo "=== Syncing Codex Configs ==="
 src="$SCRIPT_DIR/codex/config/AGENTS.md"
 dst="$CODEX_DIR/AGENTS.md"
 if [[ -f "$src" ]]; then
-    copy_file_with_backup "$src" "$dst" "Codex AGENTS.md"
+    copy_file_replace "$src" "$dst" "Codex AGENTS.md"
 else
     warn "Source not found: $src"
 fi
@@ -120,9 +115,9 @@ if [[ -d "$src" ]]; then
     for skill_dir in "$src"/*/; do
         if [[ -d "$skill_dir" ]]; then
             skill_name="$(basename "$skill_dir")"
-            [[ "$skill_name" == .* ]] && continue
+            is_skipped_entry "$skill_name" && continue
             dst="$CODEX_SKILLS_DIR/$skill_name"
-            copy_dir_with_backup "$skill_dir" "$dst" "Codex skill: $skill_name/"
+            copy_dir_replace "$skill_dir" "$dst" "Codex skill: $skill_name/"
             ((skill_count++)) || true
         fi
     done

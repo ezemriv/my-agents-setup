@@ -96,9 +96,11 @@ The Codex instructions use GPT-5.5 for complex coding and professional work, GPT
 ```bash
 ./sync.sh  # copy OpenCode and Codex configs/skills/commands from this repo into local config directories
 ./pull.sh  # pull OpenCode and Codex configs/skills/commands from local config directories into this repo
+./cleanup-backups.sh          # dry-run cleanup of old *.backup-* entries
+./cleanup-backups.sh --apply  # remove old *.backup-* entries
 ```
 
-`sync.sh` preserves unrelated local skills. If a repo skill or command has the same name as a local one, it creates a timestamped backup before replacing it. `pull.sh` replaces same-name repo skills from local config and warns about repo-only skills that no longer exist locally, so use `git diff` to review pulled changes.
+`sync.sh` preserves unrelated local skills and replaces same-name managed files/directories without creating timestamped backups. `pull.sh` replaces same-name repo skills from local config, ignores `*.backup-*` entries, and warns about repo-only skills that no longer exist locally, so use `git diff` to review pulled changes. `cleanup-backups.sh` scans only `~/.config/opencode` and `~/.codex`; it does not delete anything unless `--apply` is passed.
 
 ## Validation Checklist
 

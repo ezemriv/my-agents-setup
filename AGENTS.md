@@ -31,7 +31,7 @@
 ### Workstreams
 | Name | Status | Notes |
 |------|--------|-------|
-| OpenCode setup sync | Active | `sync.sh` copies selected configs, custom skills, and commands into `~/.config/opencode/`; `pull.sh` imports local OpenCode config/skills back into the repo |
+| OpenCode setup sync | Active | `sync.sh` copies selected configs, custom skills, and commands into `~/.config/opencode/` without creating `*.backup-*` duplicates; `pull.sh` imports local OpenCode config/skills back into the repo and skips backup-named entries; `cleanup-backups.sh` removes old backup-named entries only with `--apply` |
 | Codex setup | Active | `codex/config/AGENTS.md` is the Codex system instruction source; copy it to `~/.codex/AGENTS.md` |
 | Dashboard | Active | Uses `dashboard/package.json` scripts: `npm run dev`, `npm run build`, `npm run preview` |
 | Skills library | Active | `opencode/skills/` contains local skills, including custom skills synced by `sync.sh` |
