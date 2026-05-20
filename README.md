@@ -8,7 +8,7 @@ This repo contains configuration files for [OpenCode](https://opencode.ai) and C
 
 ## Repository Layout
 
-- `opencode/config/`: OpenCode lite/full configs, oh-my-openagent routing, and OpenCode system instructions.
+- `opencode/config/`: OpenCode active/lite/full configs, oh-my-openagent routing, and OpenCode system instructions.
 - `codex/config/`: Codex system instructions adapted for GPT-5.4 and GPT-5.5.
 - `opencode/skills/`: OpenCode skills.
 - `opencode/commands/`: OpenCode command files.

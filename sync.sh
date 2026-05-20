@@ -9,6 +9,7 @@ CODEX_DIR="$HOME/.codex"
 CODEX_SKILLS_DIR="$CODEX_DIR/skills"
 
 CONFIG_FILES=(
+    "opencode.json"
     "opencode-lite.json"
     "opencode-full.json"
     "oh-my-openagent.json"

@@ -130,3 +130,18 @@ When using the `codex-project-start` skill inside a git repository:
 - **When to consult it:** For questions or tasks about Eze's projects, especially Tradelab, query this wiki for context before relying on memory or assumptions.
 - **How to query it:** Read `~/My-Personal-Brain/AGENTS.md` for instructions.
 - **After substantial project work:** After completing a complex task related to Eze's projects, or any task that substantially changes architecture, workflows, roadmap, decisions, or operating context, ask Eze whether new information sources should be added to the personal brain/wiki at `raw/`.
+
+---
+
+## 9. CodeGraph
+
+CodeGraph is installed globally and exposed to Codex as the `codegraph` MCP server.
+
+### If `.codegraph/` exists in the project
+- Prefer CodeGraph MCP tools for semantic code discovery before broad filesystem searches.
+- Use lightweight direct lookups for targeted work: `codegraph_search`, `codegraph_callers`, `codegraph_callees`, `codegraph_impact`, `codegraph_node`, `codegraph_status`, and `codegraph_files`.
+- For broad exploration questions, delegate to an explorer subagent when useful and tell it: "This project has CodeGraph initialized (`.codegraph/` exists). Use CodeGraph as the primary exploration tool. Do not re-read files already returned by CodeGraph unless more detail is needed."
+- Run `codegraph sync` after large file changes if the MCP index may be stale.
+
+### If `.codegraph/` does not exist
+- Ask before initializing unless the user explicitly requested setup. Initialize with `codegraph init -i` from the project root.

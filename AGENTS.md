@@ -8,7 +8,7 @@
 |------|------|
 | Product | My Agents Setup, a personal repository for OpenCode and Codex configuration, agent routing, custom skills, commands, and an OpenCode Go dashboard |
 | Repo rename | Repository was renamed to `my-agents-setup`; avoid reintroducing old repo URLs, headings, or Vite base paths |
-| Primary config | `opencode/config/` stores OpenCode lite/full configs, `oh-my-openagent.json`, and system-wide agent instructions |
+| Primary config | `opencode/config/` stores OpenCode active/lite/full configs, `oh-my-openagent.json`, and system-wide agent instructions |
 | Codex config | `codex/config/` stores Codex system instructions adapted for GPT-5.4 and GPT-5.5 model use |
 | Skill layout | OpenCode skills live in `opencode/skills/`; Codex skills live in `codex/skills/` |
 | Dashboard | `dashboard/` is a React 18 + Vite + Tailwind static SPA for comparing OpenCode Go models |

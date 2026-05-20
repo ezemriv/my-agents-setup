@@ -26,6 +26,15 @@
       },
       "enabled": false,
       "timeout": 300000
+    },
+    "codegraph": {
+      "type": "local",
+      "command": [
+        "codegraph",
+        "serve",
+        "--mcp"
+      ],
+      "enabled": true
     }
   },
   "experimental": {
