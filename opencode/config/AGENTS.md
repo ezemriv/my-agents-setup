@@ -89,3 +89,11 @@ No `Depends on` line = can run in parallel.
 
 ### Context7 MCP
 For **Polars**, **NautilusTrader**, or other fast-evolving libs, **ALWAYS** fetch docs via **Context7 MCP** before writing or refactoring. If unavailable, **STOP and ask** before proceeding.
+
+---
+
+## 8. Personal Brain / Wiki
+- **Knowledge base path:** Eze's personal brain and wiki lives at `/Users/ezequiel.rivero/personal/My-Personal-Brain`.
+- **When to consult it:** For questions or tasks about Eze's projects, especially Tradelab, query this wiki for context before relying on memory or assumptions.
+- **How to query it:** Read `/Users/ezequiel.rivero/personal/My-Personal-Brain/AGENTS.md` for instructions.
+- **After substantial project work:** After completing a complex task related to Eze's projects, or any task that substantially changes architecture, workflows, roadmap, decisions, or operating context, ask Eze whether new information sources should be added to the personal brain/wiki at `raw/`.
