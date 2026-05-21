@@ -9,6 +9,9 @@
 - **Background:** Data, statistics, analytics
 
 ---
+## 0. Mandatory Behaviors
+
+- **Subagent leverage:** Use native subagents to protect the main context window for exploration, blind review, and multi-step execution. Do not inline these workflows unless the user explicitly says not to delegate. For trivial single-file edits or direct factual answers, do the work inline.
 
 ## 1. Think Before Coding
 Before implementing: state assumptions explicitly, surface multiple interpretations instead of picking silently, push back if a simpler approach exists, stop and ask if something is unclear.
