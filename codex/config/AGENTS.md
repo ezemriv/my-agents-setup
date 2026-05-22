@@ -70,7 +70,6 @@ Prompting rules for GPT-5.4/5.5:
 
 ### Development Approach
 - **ALWAYS** create a new branch for new features.
-- For small, surgical changes, direct commits to the current branch are acceptable; do not create a branch or PR unless requested or risk justifies it.
 - **ALWAYS** update `CLAUDE.md` / `AGENTS.md` / `GEMINI.md` and `README.md` as you go.
 - Scaffold first, iterative, containerization-friendly.
 
