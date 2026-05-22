@@ -89,7 +89,7 @@ mkdir -p ~/.codex
 cp codex/config/AGENTS.md ~/.codex/AGENTS.md
 ```
 
-The Codex instructions use GPT-5.5 for complex coding and professional work, GPT-5.4 for everyday implementation, and GPT-5.4 mini for bounded low-risk side tasks.
+The Codex instructions use GPT-5.5 for complex coding and professional work, GPT-5.4 for everyday implementation, and GPT-5.4 mini for bounded low-risk side tasks. Codex plans use `[LOW]`, `[MEDIUM]`, and `[HIGH]` task tags with optional OpenCode / oh-my-openagent executor hints so routine work can route to cheaper agents.
 
 ## Sync and Pull
 
@@ -256,6 +256,7 @@ The `oh-my-openagent.json` file implements **tiered model routing** to maximize 
 2. **Use `fallback_models` everywhere** - Rate limits are signals to switch models
 3. **Keep concurrency conservative** - Start at 2-3 parallel tasks
 4. **Route volume work through V4 Flash** - 31K req/5hr is effectively unlimited
+5. **Keep Codex plans granular** - `[LOW]` and `[MEDIUM]` tasks with executor hints let oh-my-openagent assign cheaper agents instead of defaulting everything to Sisyphus.
 
 ## OpenCode Go Dashboard
 

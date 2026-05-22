@@ -96,15 +96,19 @@ Every task **MUST** include a complexity tag and explicit dependencies.
 
 **Complexity tags:**
 
-| Tag | Criteria |
-|-----|----------|
-| `[LOW-COMPLEX]` | Single file, mechanical, unambiguous (config, renaming, simple tests, docs) |
-| `[HIGH-COMPLEX]` | 2+ files, cross-cutting, decision-making, novel patterns. When uncertain, use this. |
+| Tag | Criteria | Suggested OpenCode / oh-my-openagent category |
+|-----|----------|---------------------------------------------|
+| `[LOW]` | Single-file, mechanical, unambiguous tasks: config, renaming, simple tests, docs | `quick` or `writing` |
+| `[MEDIUM]` | Routine implementation across 1-3 related files, clear local pattern, limited decisions | `unspecified-low` |
+| `[HIGH]` | Cross-cutting behavior, migrations, public API changes, tricky correctness, multi-module coordination | `deep` or `unspecified-high` |
+
+Do not mark a task `[HIGH]` only because it touches multiple files. Prefer splitting plans into small executable tasks with precise dependencies and verification checks so cheaper agents can handle bounded work.
 
 **Dependency tracking** - declare when relevant:
 ```markdown
-## [HIGH-COMPLEX] Task 9: Examples folder scaffold
+## [MEDIUM] Task 9: Examples folder scaffold
 **Depends on:** Task 8.1, Task 8.3
+**Executor hint:** unspecified-low
 **Files:**
 - Create: `example/README.md`
 ```
@@ -112,7 +116,7 @@ No `Depends on` line = can run in parallel.
 
 **Ordering:** foundation -> independent tasks -> dependent tasks, grouped by phase.
 
-**Execution:** route each task to subagents matching the complexity tag when subagents are explicitly requested or already part of the workflow.
+**Execution:** Codex is the main planning tool. Plans may later be executed by OpenCode with oh-my-openagent, so include an `Executor hint:` when useful (`quick`, `unspecified-low`, `deep`, `writing`, etc.). Use Sisyphus for orchestration and genuinely hard work, but shape plans so cheaper category agents can execute bounded `[LOW]` and `[MEDIUM]` tasks.
 
 ### Context7 MCP
 For **Polars**, **NautilusTrader**, or other fast-evolving libs, **ALWAYS** fetch docs via **Context7 MCP** before writing or refactoring. If unavailable, **STOP and ask** before proceeding.
