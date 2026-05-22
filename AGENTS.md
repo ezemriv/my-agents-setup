@@ -39,6 +39,7 @@
 ### Preferences
 - Keep edits surgical and match existing style.
 - Prefer explicit assumptions and verifiable outcomes.
+- For small, surgical changes, direct commits to the current branch are acceptable; no new branch or PR is needed unless requested or risk justifies it.
 - For this repo, preserve external `oh-my-opencode` package/schema references; they are not old repo-name mentions.
 - When `codex-project-start` creates `memory/` inside a git repo, add `memory/` to `.gitignore` unless the user explicitly wants memory tracked.
 
