@@ -9,7 +9,7 @@ This repo contains configuration files for [OpenCode](https://opencode.ai) and C
 ## Repository Layout
 
 - `opencode/config/`: OpenCode active/lite/full configs, oh-my-openagent routing, and OpenCode system instructions.
-- `codex/config/`: Codex system instructions adapted for GPT-5.4 and GPT-5.5.
+- `codex/config/`: Codex config and system instructions adapted for GPT-5.4 and GPT-5.5.
 - `opencode/skills/`: OpenCode skills.
 - `opencode/commands/`: OpenCode command files.
 - `codex/skills/`: Codex skills.
@@ -82,14 +82,17 @@ alias opencode-lite='cp ~/.config/opencode/opencode-lite.json ~/.config/opencode
 
 ## Codex Setup
 
-Copy the Codex agent instructions into your Codex config directory:
+Copy the Codex config and agent instructions into your Codex config directory:
 
 ```bash
 mkdir -p ~/.codex
+cp codex/config/config.toml ~/.codex/config.toml
 cp codex/config/AGENTS.md ~/.codex/AGENTS.md
 ```
 
 The Codex instructions use GPT-5.5 for complex coding and professional work, GPT-5.4 for everyday implementation, and GPT-5.4 mini for bounded low-risk side tasks. Codex plans use `[LOW]`, `[MEDIUM]`, and `[HIGH]` task tags with optional OpenCode / oh-my-openagent executor hints so routine work can route to cheaper agents.
+
+`codex/config/config.toml` is the portable source-of-truth config. It includes model defaults, enabled plugins, MCP servers such as CodeGraph and NotebookLM, and desktop preferences. It intentionally excludes local runtime state such as project trust history, marketplace cache paths, generated `node_repl` environment, notifications, and onboarding state.
 
 ## Sync and Pull
 
