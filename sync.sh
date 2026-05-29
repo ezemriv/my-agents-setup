@@ -99,15 +99,7 @@ else
 fi
 
 echo ""
-echo "=== Syncing Codex Configs ==="
-src="$SCRIPT_DIR/codex/config/config.toml"
-dst="$CODEX_DIR/config.toml"
-if [[ -f "$src" ]]; then
-    copy_file_replace "$src" "$dst" "Codex config.toml"
-else
-    warn "Source not found: $src"
-fi
-
+echo "=== Syncing Codex Instructions ==="
 src="$SCRIPT_DIR/codex/config/AGENTS.md"
 dst="$CODEX_DIR/AGENTS.md"
 if [[ -f "$src" ]]; then

@@ -82,23 +82,22 @@ alias opencode-lite='cp ~/.config/opencode/opencode-lite.json ~/.config/opencode
 
 ## Codex Setup
 
-Copy the Codex config and agent instructions into your Codex config directory:
+Copy the Codex agent instructions into your Codex config directory:
 
 ```bash
 mkdir -p ~/.codex
-cp codex/config/config.toml ~/.codex/config.toml
 cp codex/config/AGENTS.md ~/.codex/AGENTS.md
 ```
 
 The Codex instructions use GPT-5.5 for complex coding and professional work, GPT-5.4 for everyday implementation, and GPT-5.4 mini for bounded low-risk side tasks. Codex plans use `[LOW]`, `[MEDIUM]`, and `[HIGH]` task tags with optional OpenCode / oh-my-openagent executor hints so routine work can route to cheaper agents.
 
-`codex/config/config.toml` is the portable source-of-truth config. It includes model defaults, enabled plugins, MCP servers such as CodeGraph and NotebookLM, and desktop preferences. It intentionally excludes local runtime state such as project trust history, marketplace cache paths, generated `node_repl` environment, notifications, and onboarding state.
+Codex `config.toml` is intentionally local-only and is not synced by this repo.
 
 ## Sync and Pull
 
 ```bash
-./sync.sh  # copy OpenCode and Codex configs/skills/commands from this repo into local config directories
-./pull.sh  # pull OpenCode and Codex configs/skills/commands from local config directories into this repo
+./sync.sh  # copy OpenCode configs plus Codex instructions/skills from this repo into local config directories
+./pull.sh  # pull OpenCode configs plus Codex instructions/skills from local config directories into this repo
 ./cleanup-backups.sh          # dry-run cleanup of old *.backup-* entries
 ./cleanup-backups.sh --apply  # remove old *.backup-* entries
 ```

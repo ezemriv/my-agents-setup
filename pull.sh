@@ -145,7 +145,7 @@ fi
 warn_repo_only_files "$OPENCODE_COMMANDS_DIR" "$SCRIPT_DIR/opencode/commands" "OpenCode command"
 
 echo ""
-echo "=== Pulling Codex Configs from Local Codex ==="
+echo "=== Pulling Codex Instructions from Local Codex ==="
 src="$CODEX_DIR/AGENTS.md"
 dst="$SCRIPT_DIR/codex/config/AGENTS.md"
 if [[ -f "$src" ]]; then
