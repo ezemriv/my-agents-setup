@@ -1,0 +1,4 @@
+interface:
+  display_name: "WhatsApp Local Extract"
+  short_description: "Find local WhatsApp chats and media"
+  default_prompt: "Use $whatsapp-local-extract to find a local WhatsApp chat by contact or group name and list its messages/media."

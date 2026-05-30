@@ -1,0 +1,4 @@
+interface:
+  display_name: "X Article Reader"
+  short_description: "Read full public X articles from links"
+  default_prompt: "Use $x-article-reader to extract and summarize this public X article link."

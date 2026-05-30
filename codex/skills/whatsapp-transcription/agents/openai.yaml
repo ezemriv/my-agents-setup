@@ -1,0 +1,4 @@
+interface:
+  display_name: "WhatsApp Transcription"
+  short_description: "Transcribe WhatsApp audio locally"
+  default_prompt: "Use $whatsapp-transcription to transcribe WhatsApp voice notes with the local high-accuracy workflow."
